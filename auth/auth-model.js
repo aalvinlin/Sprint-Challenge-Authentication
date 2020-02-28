@@ -14,6 +14,6 @@ function addUser(user) {
 function getUserBy(query) {
 
     return database("users")
-        .select(query)
+        .where(query)
         .first();
 }
