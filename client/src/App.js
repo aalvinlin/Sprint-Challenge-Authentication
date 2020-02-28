@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 
-export default () => (
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Errors from "./components/Errors";
+
+const App = () => {
+
+  const [errorMessages, setErrorMesssages] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+return (
   <>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal than this React app.</p>
+    <Login errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+    <Signup errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+    <Errors errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} />
   </>
 );
+
+}
+
+export default App;
