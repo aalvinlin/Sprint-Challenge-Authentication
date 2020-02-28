@@ -6,14 +6,14 @@ import Errors from "./components/Errors";
 
 const App = () => {
 
-  const [errorMessages, setErrorMesssages] = useState([]);
+  const [errorMessages, setErrorMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 return (
   <>
-    <Login errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-    <Signup errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-    <Errors errorMessages={errorMessages} setErrorMesssages={setErrorMesssages} />
+    <Login errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+    <Signup errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+    <Errors errorMessages={errorMessages} setErrorMessages={setErrorMessages} />
   </>
 );
 
