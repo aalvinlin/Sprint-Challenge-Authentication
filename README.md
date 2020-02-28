@@ -40,11 +40,25 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] What is the purpose of using _sessions_?
 
+    Sessions allow the client and server to communicate that the client has been authenticated. Once the server verifies that the client has the proper credentials, it sends the client data in the form of a cookie to be stored. The data from the cookie is passed back and forth each time authentication and authorization are required. As a result, clients do not need to re-login every time a new page is requested; the server has verifiable info that the client is authorized to view each new page.
+
 - [ ] What does bcrypt do to help us store passwords in a secure manner.
+
+    Bcrypt enables secure password storage by hashing passwords with a salt and re-hashing the hash a certain number of iterations. The use of a salt prevents attacks from rainbow tables, so that hackers cannot simply look up what the user has typed in as a password. Hashes are also one-way, so knowing the hash does not allow an easy way of finding the original password. Consequently, re-hashing the hashes thousands of times or more also makes it so that brute-forcing the password is unrealistically time-intensive. 
 
 - [ ] What does bcrypt do to slow down attackers?
 
+    Bcrypt uses a salt so that the computed hash cannot be looked up in a rainbow table. Even if there is a known hash for the password alone, the addition of the salt generates a completely new hash so that the known hash is useless. Bcrypt also re-hashes the computed hashes 2^n times, where n is specified by the user. The additional hashing slows down the attackers so that brute-forcing the password takes a large amount of time and computing power.
+
 - [ ] What are the three parts of the JSON Web Token?
+
+    The three parts of the JSON web toke are the header, payload, and signature.
+
+    The header contains information about the type of token and how it is signed. This information is used in the last part of the token to verify its authenticity.
+
+    The payload contains information that the client and server will send back and forth. Usernames and IDs are common parts of the payload.
+
+    The signature is used to verify that the payload is in fact what was sent from the source, that it has not been tampered with. If the signature is invalid, then the token should be rejected because the payload contents do not match what was intended to be sent.
 
 ## Minimum Viable Product
 
@@ -62,3 +76,35 @@ Build a front end to show the jokes.
 
 - [ ] Add a React client that connects to the API and has pages for `Sign Up`, `Sign In` and showing a list of `Jokes`.
 - [ ] Once you have the functionality down, style it!
+
+# API Specifications: Auth
+
+## POST /api/auth/register
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+201|Success|Account created.|"Created account for (username)"|```javascript {message: "Created account for (username)", token: string (token)}```
+400|Error|Missing info.|"Username and password are both required."|```javascript {message: "Username and password are both required."}```
+400|Error|Username in use.|"Username already taken."|```javascript {message: "Username already taken."}```
+500|Error|Server error.|"server error in retrieving username"|```javascript {message: "server error in retrieving username", error: (error)}```
+500|Error|Server error.|"Could not add user"|```javascript {error: (error)}```
+
+## POST /api/auth/login
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+200|Success|Logged in.|"Logged in (username)"|```javascript {message: "Logged in (username)", token: string (token)}```
+400|Error|Missing info.|"Username and password are both required."|```javascript {message: "Username and password are both required."}```
+401|Error|Invalid credentials.|"Invalid credentials"|```javascript {message: "invalid credentials"}```
+
+# API Specifications: Jokes
+
+## GET /api/jokes
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+200|Success|Jokes returned.|none|```javascript [{id, joke}, {id, joke}, ... ]```
+400|Error|Missing info.|"You must log in first to view this resource."|```javascript {message: "You must log in first to view this resource."}```
+403|Error|Invalid credentials.|"Invalid credentials"|```javascript {message: "invalid credentials"}```
+500|Error|Server error.|"Error Fetching Jokes"|```javascript {message: Error Fetching Jokes, error: (error)}```
+
