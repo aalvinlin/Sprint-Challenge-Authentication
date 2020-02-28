@@ -15,7 +15,7 @@ return (
     <Login errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     <Signup errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     <Errors errorMessages={errorMessages} setErrorMessages={setErrorMessages} />
-    <Jokes isLoggedIn={isLoggedIn} />
+    <Jokes isLoggedIn={isLoggedIn} errorMessages={errorMessages} setErrorMessages={setErrorMessages} />
   </>
 );
 

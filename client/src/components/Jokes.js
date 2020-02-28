@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import React, {useState, useEffect} from "react";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
 
-const Jokes = ({isLoggedIn}) => {
+const Jokes = ({isLoggedIn, errorMessages, setErrorMessages}) => {
 
-    let jokes = [];
+    const [jokes, setJokes] = useState([]);
 
     useEffect(() => {
 
@@ -11,12 +11,14 @@ const Jokes = ({isLoggedIn}) => {
         {
             axiosWithAuth().get("jokes")
             .then(response => {
-                jokes = response.data;
+                setJokes(response.data);
 
                 console.log("jokes are", response.data);
             })
             .catch(error => {
-                console.log("error getting jokes.")
+                console.log("error getting jokes.", error)
+
+                setErrorMessages("error getting jokes")
             })
         }
 
@@ -32,7 +34,7 @@ const Jokes = ({isLoggedIn}) => {
 
             <div>
 
-                {jokes.map((joke, id) => <div>{joke}</div>)}
+                {jokes.map((jokeData, id) => <p>{jokeData.joke}</p>)}
 
             </div>
 

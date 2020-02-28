@@ -22,6 +22,8 @@ const Login = ({errorMessages, setErrorMessages, isLoggedIn, setIsLoggedIn}) => 
 
                 setIsLoggedIn(true);
                 setErrorMessages([]);
+
+                localStorage.setItem("token", response.data.token);
                 
                 console.log("logged in.", response)
             })
@@ -49,7 +51,7 @@ const Login = ({errorMessages, setErrorMessages, isLoggedIn, setIsLoggedIn}) => 
                         <input type="text" name="username" value={userInput.username} onChange={handleChange}/>
 
                         <label htmlFor="password">Password: </label>
-                        <input type="text" name="password" value={userInput.password} onChange={handleChange}/>
+                        <input type="password" name="password" value={userInput.password} onChange={handleChange}/>
 
                         <button onClick={handleSubmit}>Log in</button>
                         
