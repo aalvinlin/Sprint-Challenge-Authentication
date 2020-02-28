@@ -2,10 +2,16 @@ const database = require("./auth-model");
 
 module.exports = (req, res, next) => {
 
-    database.getUserBy(req.username)
-        .then(userCount => {
-            if (userCount > 0)
+    console.log("finding users...", req.body.username)
+
+    database.getUserBy({username: req.body.username})
+        .then(existingUsersFound => {
+
+            // username already exists in database
+            if (existingUsersFound)
                 { res.status(400).json({message: "Username already taken."})}
+
+            // username is unique
             else
                 { next(); }
         })
