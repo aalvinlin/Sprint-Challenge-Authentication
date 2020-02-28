@@ -1,10 +1,11 @@
 const router = require('express').Router();
 
-router.post('/register', (req, res) => {
-  // implement registration
+router.post('/register', checkUsernameAndPasswordEntered, checkUsernameUnique, (req, res) => {
+      // let { username, password } = req.body;
+
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', checkUsernameAndPasswordEntered, (req, res) => {
   // implement login
 });
 
