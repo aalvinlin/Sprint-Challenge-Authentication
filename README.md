@@ -76,3 +76,35 @@ Build a front end to show the jokes.
 
 - [ ] Add a React client that connects to the API and has pages for `Sign Up`, `Sign In` and showing a list of `Jokes`.
 - [ ] Once you have the functionality down, style it!
+
+# API Specifications: Auth
+
+## POST /api/auth/register
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+201|Success|Account created.|"Created account for (username)"|```javascript {message: "Created account for (username)", token: string (token)}```
+400|Error|Missing info.|"Username and password are both required."|```javascript {message: "Username and password are both required."}```
+400|Error|Username in use.|"Username already taken."|```javascript {message: "Username already taken."}```
+500|Error|Server error.|"server error in retrieving username"|```javascript {message: "server error in retrieving username", error: (error)}```
+500|Error|Server error.|"Could not add user"|```javascript {error: (error)}```
+
+## POST /api/auth/login
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+200|Success|Logged in.|"Logged in (username)"|```javascript {message: "Logged in (username)", token: string (token)}```
+400|Error|Missing info.|"Username and password are both required."|```javascript {message: "Username and password are both required."}```
+401|Error|Invalid credentials.|"Invalid credentials"|```javascript {message: "invalid credentials"}```
+
+# API Specifications: Jokes
+
+## GET /api/jokes
+
+|Status|Type|Description|Message|Return Value
+|------|----|-----------|-------|------------|
+200|Success|Jokes returned.|none|```javascript [{id, joke}, {id, joke}, ... ]```
+400|Error|Missing info.|"You must log in first to view this resource."|```javascript {message: "You must log in first to view this resource."}```
+403|Error|Invalid credentials.|"Invalid credentials"|```javascript {message: "invalid credentials"}```
+500|Error|Server error.|"Error Fetching Jokes"|```javascript {message: Error Fetching Jokes, error: (error)}```
+

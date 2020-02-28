@@ -28,8 +28,6 @@ router.post('/register', checkUsernameAndPasswordEntered, checkUsernameUnique, (
 
 router.post('/login', checkUsernameAndPasswordEntered, (req, res) => {
   
-  console.log(req.body)
-
   database.getUserBy({username: req.body.username})
     .then(userFound => {
 
