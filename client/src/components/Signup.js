@@ -16,7 +16,7 @@ const Signup = ({errorMessages, setErrorMessages, isLoggedIn, setIsLoggedIn}) =>
     const handleSubmit = event => {
         event.preventDefault();
 
-        axios.post("http://localhost:3000/api/auth/register", userInput)
+        axios.post("http://localhost:3300/api/auth/register", userInput)
             .then(response => {
 
                 setIsLoggedIn(true);

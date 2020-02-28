@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Errors from "./components/Errors";
+import Jokes from "./components/Jokes";
 
 const App = () => {
 
@@ -14,6 +15,7 @@ return (
     <Login errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     <Signup errorMessages={errorMessages} setErrorMessages={setErrorMessages} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     <Errors errorMessages={errorMessages} setErrorMessages={setErrorMessages} />
+    <Jokes isLoggedIn={isLoggedIn} />
   </>
 );
 
