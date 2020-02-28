@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+axios.defaults.withCredentials = true;
+
 
 const Login = ({errorMessages, setErrorMessages, isLoggedIn, setIsLoggedIn}) => {
 
@@ -7,7 +9,7 @@ const Login = ({errorMessages, setErrorMessages, isLoggedIn, setIsLoggedIn}) => 
         username: "",
         password: ""
     });
-    
+
     const handleChange = event => {
         setUserInput({...userInput, [event.target.name]: event.target.value})
     }
